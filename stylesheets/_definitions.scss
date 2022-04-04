@@ -1,0 +1,31 @@
+$button-size: 30px;
+$bg-color: darkgray;
+$display-bg-color: black;
+
+$gap-size: 5px;
+
+@mixin square($a: $button-size) {
+  width: $a;
+  height: $a;
+}
+
+@mixin fit-content {
+  width: fit-content;
+  height: fit-content;
+}
+
+@mixin font-stack($font-size: 14pt, $font-color: white) {
+  color: $font-color;
+  font-size: $font-size;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+@mixin grid-equal-gaps {
+  column-gap: 5px;
+  row-gap: 5px;
+}
+
+@mixin rounded($color: gray) {
+  border: solid 2px gray;
+  border-radius: 12px;
+}

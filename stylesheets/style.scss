@@ -1,0 +1,51 @@
+@use "definitions" as *;
+
+#root {
+    width: fit-content;
+    height: fit-content;
+
+    margin: 15% auto auto;
+    text-align: center;
+}
+
+.container {
+    @include rounded;
+    @include fit-content;
+    @include grid-equal-gaps;
+    @include font-stack;
+
+    display: grid;
+    grid-template-columns: repeat(4, 30px);
+    grid-auto-rows: auto;
+
+    padding: 10px;
+    background-color: $bg-color;
+
+    .button {
+        @include rounded;
+        @include square(auto);
+
+        position: relative;
+        display: block;
+        //grid-area: butn;
+        padding: 10% 10% 10% 10%;
+    }
+
+    .double-button {
+        @extend .button;
+        grid-column: span 2;
+    }
+
+    #display {
+        @include square(auto);
+        @include rounded(gray);
+        position: relative;
+        display: block;
+
+        background-color: $display-bg-color;
+        grid-column: span 4;
+
+        text-align: right;
+        padding-right: 10%;
+    }
+}
