@@ -1,4 +1,8 @@
-const $ = (id) => document.getElementById(id)
+import React from "react"
+import Display from "./Display.js"
+import DoubleButton from "./DoubleButton.js"
+import Button from "./Button.js"
+
 const mainSymbols = [
     'C', 'inv', '%', '/',
     7, 8, 9, 'x',
@@ -6,16 +10,11 @@ const mainSymbols = [
     1, 2, 3, '+',
 ]
 
-ReactDOM.render(
-    <Calculator/>,
-    $("root")
-)
-
-function Calculator() {
+export default function Calculator() {
     let lastKey = mainSymbols.length
     return (
         <div className="container" key={99}>
-            <Display/>
+            <Display val={'0'}/>
             {mainSymbols.map((sym, i) => (
                 <Button sym={sym} key={i}/>
             ))}
@@ -23,27 +22,5 @@ function Calculator() {
             <Button sym={','} key={lastKey++}/>
             <Button sym={'='} key={lastKey++}/>
         </div>
-    )
-}
-
-function Button({sym}) {
-    return (
-        <div className="button">
-            {sym}
-        </div>
-    )
-}
-
-function DoubleButton({sym}) {
-    return (
-        <div className="double-button">
-            {sym}
-        </div>
-    )
-}
-
-function Display() {
-    return (
-        <div id="display"> 0</div>
     )
 }

@@ -21,21 +21,17 @@
   padding: 10px;
   background-color: darkgray;
 }
-
-.container .button, .container .double-button {
-  border: solid 2px gray;
-  border-radius: 12px;
+.container button, .container .fat {
   width: auto;
   height: auto;
   position: relative;
   display: block;
+  border-radius: 12px;
   padding: 10% 10% 10% 10%;
 }
-
-.container .double-button {
+.container .fat {
   grid-column: span 2;
 }
-
 .container #display {
   width: auto;
   height: auto;

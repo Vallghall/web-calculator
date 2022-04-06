@@ -21,18 +21,17 @@
     padding: 10px;
     background-color: $bg-color;
 
-    .button {
-        @include rounded;
+    button {
         @include square(auto);
 
         position: relative;
         display: block;
-        //grid-area: butn;
+        border-radius: 12px;
         padding: 10% 10% 10% 10%;
     }
 
-    .double-button {
-        @extend .button;
+    .fat {
+        @extend button;
         grid-column: span 2;
     }
 
