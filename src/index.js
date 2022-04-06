@@ -1,12 +1,8 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import Calculator from "./components/Calculator.js"
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './styles/App.css'
 
-const $ = (id) => document.getElementById(id)
+const root = ReactDOM.createRoot(document.getElementById('root'))
 
-
-ReactDOM.render(
-    <Calculator/>,
-    $("root")
-)
-
+root.render(<App/>)

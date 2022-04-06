@@ -1,0 +1,14 @@
+.fat {
+  width: auto;
+  height: auto;
+  position: relative;
+  display: block;
+  border-radius: 12px;
+  padding: 10% 10% 10% 10%;
+  grid-column: span 2;
+}
+.fat:hover {
+  background-color: lightgray;
+}
+
+/*# sourceMappingURL=DoubleButton.module.css.map */

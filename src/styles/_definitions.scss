@@ -1,4 +1,7 @@
 $button-size: 30px;
+$font-size-button: 14pt;
+$font-size-default: 18pt;
+
 $bg-color: darkgray;
 $display-bg-color: black;
 
@@ -14,7 +17,7 @@ $gap-size: 5px;
   height: fit-content;
 }
 
-@mixin font-stack($font-size: 14pt, $font-color: white) {
+@mixin font-stack($font-size: $font-size-default, $font-color: white) {
   color: $font-color;
   font-size: $font-size;
   font-family: 'Times New Roman', Times, serif;
@@ -28,4 +31,16 @@ $gap-size: 5px;
 @mixin rounded($color: gray) {
   border: solid 2px gray;
   border-radius: 12px;
+}
+
+@mixin button-hover-animation($color) {
+  &:hover {
+    background-color: $color;
+  }
+}
+
+@mixin button-after-click-effect($color) {
+  &:focus {
+    background-color: darken($color, 10);
+  }
 }
