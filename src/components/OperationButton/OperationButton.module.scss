@@ -2,7 +2,7 @@
 
 .button {
   @include square(auto);
-  @include button-hover-animation(lighten(darkgoldenrod, 10));
+  @include button-hover-animation(lighten(darkgoldenrod, 10), rgba(255, 0, 0, .5));
   @include button-after-click-effect(pink);
 
   position: relative;

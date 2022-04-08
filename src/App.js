@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import MyButton from "./components/MyButton/MyButton";
-import DoubleButton from "./components/DoubleButton/DoubleButton";
 import Display from "./components/Display/Display";
 import OperationButton from "./components/OperationButton/OperationButton";
 
@@ -9,11 +8,10 @@ const mainSymbols = [
   7, 8, 9, 'x',
   4, 5, 6, '-',
   1, 2, 3, '+',
+  '±', 0, ',', '=',
 ]
 
 export default function App() {
-    let lastKey = mainSymbols.length
-
     const [display, setDisplay] = useState(0)
     const [equation, setEquation] = useState({fst: 0, snd: 0, op: undefined})
 
@@ -81,6 +79,18 @@ export default function App() {
             case ",":
                 alert("NOT YET IMPLEMENTED")
                 break
+            case "±":
+                if (equation.op) {
+                    const newEquation = {...equation, snd: -equation.snd}
+                    setEquation(newEquation)
+                    setDisplay(newEquation.snd)
+                }
+                else {
+                    const newEquation = {...equation, fst: -equation.fst}
+                    setEquation(newEquation)
+                    setDisplay(newEquation.fst)
+                }
+                break
             default:
                 setEquation({...equation, op: val})
         }
@@ -91,13 +101,10 @@ export default function App() {
         <div className="container" key={99}>
             <Display value={display}/>
             {mainSymbols.map((sym, i) => (
-                (['+', '-', '/', 'x'].includes(sym))
+                (['+', '-', '/', 'x', '='].includes(sym))
                     ?   <OperationButton handle={updateEquation} sym={sym} key={i}/>
                     :   <MyButton handle={updateEquation} sym={sym} key={i}/>
             ))}
-            <DoubleButton sym={0} handle={updateEquation} key={lastKey++}/>
-            <MyButton handle={updateEquation} sym={','} key={lastKey++}/>
-            <MyButton handle={updateEquation} sym={'='} key={lastKey++}/>
         </div>
       )
 }
