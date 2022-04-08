@@ -9,6 +9,7 @@
 }
 .button:hover {
   background-color: #e8a90e;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, 0.2);
 }
 .button:focus {
   background-color: #ff8da1;

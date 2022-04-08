@@ -52,7 +52,16 @@ export default function App() {
                 alert("NOT YET IMPLEMENTED")
                 break
             case '%':
-                alert("NOT YET IMPLEMENTED")
+                if (equation.op) {
+                    const newEquation = {...equation, snd: equation.snd / 100}
+                    setEquation(newEquation)
+                    setDisplay(newEquation.snd)
+                }
+                else {
+                    const newEquation = {...equation, fst: equation.fst / 100}
+                    setEquation(newEquation)
+                    setDisplay(newEquation.fst)
+                }
                 break
             case '=':
                 const op = equation.op

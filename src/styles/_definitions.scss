@@ -36,6 +36,7 @@ $gap-size: 5px;
 @mixin button-hover-animation($color) {
   &:hover {
     background-color: $color;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, .2);
   }
 }
 
