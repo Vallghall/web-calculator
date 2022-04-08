@@ -19,7 +19,7 @@ export default function App() {
 
     const updateEquation = (val) => {
         const parsed = parseInt(val)
-        if (parsed) {
+        if (parsed || parsed === 0) {
             if (equation.op) {
                 const newEquation = {...equation, snd: equation.snd * 10 + parsed}
                 setEquation(newEquation)
