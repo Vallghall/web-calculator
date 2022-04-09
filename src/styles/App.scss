@@ -15,9 +15,13 @@
   @include font-stack;
 
   display: grid;
-  grid-template-columns: repeat(4, 30px);
+  grid-template-columns: repeat(4, $button-size);
   grid-auto-rows: auto;
 
   padding: 10px;
   background-color: $bg-color;
+
+  button {
+    @include font-stack($font-color: black)
+  }
 }

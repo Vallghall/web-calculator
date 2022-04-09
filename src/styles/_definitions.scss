@@ -1,15 +1,19 @@
-$button-size: 30px;
-$font-size-button: 14pt;
-$font-size-default: 18pt;
+$button-size: 6vh;
+$font-size-button: 5vh;
+$font-size-default: 4vh;
 
 $bg-color: darkgray;
 $display-bg-color: black;
 
 $gap-size: 5px;
 
-@mixin square($a: $button-size) {
+@mixin rectangle($a, $b) {
   width: $a;
-  height: $a;
+  height: $b;
+}
+
+@mixin square($a: $button-size) {
+  @include rectangle($a, $a)
 }
 
 @mixin fit-content {
