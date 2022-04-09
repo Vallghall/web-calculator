@@ -1,6 +1,6 @@
 .button {
-  width: auto;
-  height: auto;
+  width: 6vh;
+  height: 6vh;
   position: relative;
   display: block;
   border-radius: 12px;

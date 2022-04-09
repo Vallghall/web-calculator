@@ -13,13 +13,18 @@
   column-gap: 5px;
   row-gap: 5px;
   color: white;
-  font-size: 18pt;
+  font-size: 4vh;
   font-family: "Times New Roman", Times, serif;
   display: grid;
-  grid-template-columns: repeat(4, 30px);
+  grid-template-columns: repeat(4, 6vh);
   grid-auto-rows: auto;
   padding: 10px;
   background-color: darkgray;
+}
+.container button {
+  color: black;
+  font-size: 4vh;
+  font-family: "Times New Roman", Times, serif;
 }
 
 /*# sourceMappingURL=App.css.map */
