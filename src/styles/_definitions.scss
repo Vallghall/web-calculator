@@ -33,10 +33,10 @@ $gap-size: 5px;
   border-radius: 12px;
 }
 
-@mixin button-hover-animation($color) {
+@mixin button-hover-animation($color, $box-color) {
   &:hover {
     background-color: $color;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, .2);
+    box-shadow: 2px 2px 2px 1px $box-color;
   }
 }
 
