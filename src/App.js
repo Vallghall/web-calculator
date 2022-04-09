@@ -11,28 +11,50 @@ const mainSymbols = [
   '±', 0, ',', '=',
 ]
 
+const fixedNumberAmount = 5
+
+const precisionDivisor = (len) => {
+    let res = 1
+    for (let i = 0; i < len; i++) res *= 10
+    return res
+}
+
 export default function App() {
     const [display, setDisplay] = useState(0)
     const [equation, setEquation] = useState({fst: 0, snd: 0, op: undefined})
+    const [postEq, setPostEq] = useState(false)
+    const [dotMode, setDotMode] = useState(false)
+    const [afterDotCounter, setAfterDotCounter] = useState(1)
 
     const updateEquation = (val) => {
         const parsed = parseInt(val)
         if (parsed || parsed === 0) {
             if (equation.op) {
-                const newEquation = {...equation, snd: equation.snd * 10 + parsed}
+                const newEquation = {
+                    ...equation,
+                    snd: (dotMode) ? equation.snd + parsed/precisionDivisor(afterDotCounter) : equation.snd * 10 + parsed
+                }
                 setEquation(newEquation)
                 setDisplay(newEquation.snd)
+                if (postEq) setPostEq(false)
             }
             else {
-                const newEquation = {...equation, fst: equation.fst * 10 + parsed}
+                const newEquation = {
+                    ...equation,
+                    fst: (dotMode) ? equation.fst + parsed/precisionDivisor(afterDotCounter) : equation.fst * 10 + parsed
+                }
                 setEquation(newEquation)
                 setDisplay(newEquation.fst)
             }
+            if (dotMode) setAfterDotCounter(afterDotCounter + 1)
         }
         else switch (val) {
             case 'C':
                 setEquation({fst: 0, snd: 0, op: undefined})
+                setDotMode(false)
+                setAfterDotCounter(1)
                 setDisplay(0)
+                setPostEq(false)
                 break
             case '←':
                 /*
@@ -50,6 +72,10 @@ export default function App() {
                 alert("NOT YET IMPLEMENTED")
                 break
             case '%':
+                if (!dotMode) {
+                    setDotMode(true)
+                    setAfterDotCounter(3)
+                }
                 if (equation.op) {
                     const newEquation = {...equation, snd: equation.snd / 100}
                     setEquation(newEquation)
@@ -73,14 +99,21 @@ export default function App() {
                         : ((op === 'x')
                             ? { fst: equation.fst * equation.snd, snd: 0, op}
                             : { fst: equation.fst / equation.snd, snd: 0, op}))
+
+                if (!Number.isInteger(newEquation.fst)) {
+                    newEquation.fst = parseFloat(newEquation.fst.toFixed(fixedNumberAmount))
+                    setAfterDotCounter(fixedNumberAmount + 1)
+                }
                 setEquation(newEquation)
                 setDisplay(newEquation.fst)
+                setPostEq(true)
                 break
             case ",":
-                alert("NOT YET IMPLEMENTED")
+                if (dotMode) break
+                setDotMode(true)
                 break
             case "±":
-                if (equation.op) {
+                if (equation.op && !postEq) {
                     const newEquation = {...equation, snd: -equation.snd}
                     setEquation(newEquation)
                     setDisplay(newEquation.snd)
@@ -92,6 +125,8 @@ export default function App() {
                 }
                 break
             default:
+                setAfterDotCounter(1)
+                setDotMode(false)
                 setEquation({...equation, op: val})
         }
     }
