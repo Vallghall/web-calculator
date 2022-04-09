@@ -19,6 +19,12 @@ const precisionDivisor = (len) => {
     return res
 }
 
+const reduceAfterDotPart = (val, counter, f) => {
+    const newCounter = counter - 1
+    f(newCounter)
+    return parseFloat(val.toFixed(newCounter))
+}
+
 export default function App() {
     const [display, setDisplay] = useState(0)
     const [equation, setEquation] = useState({fst: 0, snd: 0, op: undefined})
@@ -32,7 +38,9 @@ export default function App() {
             if (equation.op) {
                 const newEquation = {
                     ...equation,
-                    snd: (dotMode) ? equation.snd + parsed/precisionDivisor(afterDotCounter) : equation.snd * 10 + parsed
+                    snd: (dotMode)
+                        ? Number((equation.snd + parsed/precisionDivisor(afterDotCounter)).toFixed(afterDotCounter))
+                        : equation.snd * 10 + parsed
                 }
                 setEquation(newEquation)
                 setDisplay(newEquation.snd)
@@ -41,7 +49,9 @@ export default function App() {
             else {
                 const newEquation = {
                     ...equation,
-                    fst: (dotMode) ? equation.fst + parsed/precisionDivisor(afterDotCounter) : equation.fst * 10 + parsed
+                    fst: (dotMode)
+                        ? Number((equation.fst + parsed/precisionDivisor(afterDotCounter)).toFixed(afterDotCounter))
+                        : equation.fst * 10 + parsed
                 }
                 setEquation(newEquation)
                 setDisplay(newEquation.fst)
@@ -57,19 +67,30 @@ export default function App() {
                 setPostEq(false)
                 break
             case '←':
-                /*
-                if (equation.op) {
-                    const newEquation = {...equation, snd: Math.floor(equation.snd/10)}
+                if (dotMode && afterDotCounter <= 1) {
+                    setDotMode(false)
+                }
+                if (equation.op && !postEq) {
+                    const newEquation = {
+                        ...equation,
+                        snd: (dotMode)
+                            ? reduceAfterDotPart(equation.snd, afterDotCounter, setAfterDotCounter)
+                            : Math.floor(equation.snd / 10)
+                    }
                     setEquation(newEquation)
                     setDisplay(newEquation.snd)
+                    if (postEq) setPostEq(false)
                 }
                 else {
-                    const newEquation = {...equation, fst: Math.floor(equation.fst/10)}
+                    const newEquation = {
+                        ...equation,
+                        fst: (dotMode)
+                            ? reduceAfterDotPart(equation.fst, afterDotCounter, setAfterDotCounter)
+                            : Math.floor(equation.fst / 10)
+                    }
                     setEquation(newEquation)
                     setDisplay(newEquation.fst)
                 }
-                 */
-                alert("NOT YET IMPLEMENTED")
                 break
             case '%':
                 if (!dotMode) {
